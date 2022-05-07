@@ -8,8 +8,10 @@ If you want to experience this app on your TV emulator, pleae make sure you're r
 
 For Apple TV (tvOS) > 
 
- 4) Pod Install : pod install
- 5) Run the App : react-native run-ios  --simulator "Apple TV" --scheme "TestApp-tvOS"
+ 4) Pod Install : cd ios 
+                  pod install
+ 5) Run the App : cd .. 
+                  react-native run-ios  --simulator "Apple TV" --scheme "TestApp-tvOS"
 
 For Android TV > 
   

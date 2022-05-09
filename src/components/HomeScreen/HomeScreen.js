@@ -6,14 +6,14 @@ import {
   Image,
   TVMenuControl,
   BackHandler,
+  Platform,
 } from 'react-native';
 import Styles from './Styles';
 import data from './Data';
-
 const HomeScreen = () => {
   const showDetails = data;
   const [showfocused, setShowFocusedId] = useState(null);
-  const [showPressed, setShowPressedId] = useState(undefined);
+  const [showPressed, setShowPressedId] = useState(null);
 
   const backAction = useCallback(() => {
     setShowPressedId(null);
@@ -45,7 +45,9 @@ const HomeScreen = () => {
               focusAction(i.id);
               backAction();
             }}
+            hasTVPreferredFocus={i.id === 0 ? true : false}
             onPress={() => onPressAction(i.id)}
+            activeOpacity={Platform.isTVOS ? 1.0 : 0.5}
             style={[
               Styles.ImageButtonStyles,
               {borderWidth: showfocused === i.id ? 10 : 0},
@@ -57,7 +59,7 @@ const HomeScreen = () => {
             />
           </TouchableOpacity>
           <Text key={i.id} style={Styles.TextStyles}>
-            {showPressed === i.id ? i.showName : ''}
+            {showPressed === i.id ? i.showName : ' '}
           </Text>
         </View>
       ))}

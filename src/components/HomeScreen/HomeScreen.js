@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -10,21 +10,21 @@ import {
 } from 'react-native';
 import Styles from './Styles';
 import data from './Data';
-const HomeScreen = () => {
+import {IdStore} from '../../../Store';
+import {observer} from 'mobx-react';
+const HomeScreen = observer(() => {
   const showDetails = data;
-  const [showfocused, setShowFocusedId] = useState(null);
-  const [showPressed, setShowPressedId] = useState(null);
 
   const backAction = useCallback(() => {
-    setShowPressedId(null);
+    IdStore.changeShowPressedId(null);
   }, []);
 
   const focusAction = useCallback(id => {
-    setShowFocusedId(id);
+    IdStore.changeShowFocusedId(id);
   }, []);
 
   const onPressAction = useCallback(id => {
-    setShowPressedId(id);
+    IdStore.changeShowPressedId(id);
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const HomeScreen = () => {
             activeOpacity={Platform.isTVOS ? 1.0 : 0.5}
             style={[
               Styles.ImageButtonStyles,
-              {borderWidth: showfocused === i.id ? 10 : 0},
+              {borderWidth: IdStore.showFocusedId === i.id ? 10 : 0},
             ]}>
             <Image
               source={{uri: i?.imgUrl}}
@@ -59,11 +59,11 @@ const HomeScreen = () => {
             />
           </TouchableOpacity>
           <Text key={i.id} style={Styles.TextStyles}>
-            {showPressed === i.id ? i.showName : ' '}
+            {IdStore.showPressedId === i.id ? i.showName : ' '}
           </Text>
         </View>
       ))}
     </View>
   );
-};
+});
 export default HomeScreen;

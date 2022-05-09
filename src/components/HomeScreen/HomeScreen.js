@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import Styles from './Styles';
 import data from './Data';
-import axios from 'axios';
 const HomeScreen = () => {
   const showDetails = data;
   const [showfocused, setShowFocusedId] = useState(null);
